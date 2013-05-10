@@ -10,10 +10,12 @@ The idea with LazyJS is very similar to what RequireJS aims at, which is depende
 
 If you care about contributing, you can either download the code using `git`, or through `npm`.
 
+```posh
     git clone https://github.com/bevacqua/lazyjs.git
     
     npm install lazyjs
-    
+```
+
 LazyJS has a one-step build process powered by [Grunt](http://gruntjs.com/).
 
 Use `grunt demo` to see the concept in action, `grunt build` to build, `grunt tests` for tests.
@@ -22,7 +24,9 @@ Use `grunt demo` to see the concept in action, `grunt build` to build, `grunt te
 
 Using LazyJS, you only need to embed a single `<script>` tag in your HTML
 
+```html
     <script id='lazyjs' src='/js/vendor/lazy.min.js' data-jumpstart='/js/app.js'></script>
+```
 
 This `<script>` tag will allow LazyJS to load via AJAX the script you reference in the `data-jumpstart` attribute. That's familiar enough, RequireJS behaves similarly.
 
@@ -80,7 +84,7 @@ If you stick to one module per file, `define` directives are not necessary (duri
 
 In a production scenario you don't want all those AJAX requests flying around. So you change things up very subtly:
 
-```js
+```html
     <script id='lazyjs' src='/js/vendor/lazy.min.js' data-jumpstart='/js/app.js' data-bundle='js/all.js'></script>
 ```
 
