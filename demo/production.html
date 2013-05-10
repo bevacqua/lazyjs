@@ -1,0 +1,31 @@
+<html>
+    <head>
+        <title>Production Example - LazyJS</title>
+    </head>
+    <body>
+        <h1>Production - Build Process</h1>
+
+        <ol>
+            <li>A CLI tool minifies and bundles script files</li>
+            <li>Individual modules are identified with <b>lazy define</b> comment directives</li>
+        </ol>
+
+        <h2>Page Load Flow</h2>
+
+        <ol>
+            <li>You reference LazyJS</li>
+            <li>You reference the bundle created by the CLI</li>
+            <li>LazyJS fetches the bundle as soon as it executes</li>
+            <li>LazyJS doesn't parse individual modules until they're needed</li>
+            <li>LazyJS evaluates the jumpstart script</li>
+            <li>No further AJAX is necessary</li>
+            <li>Scripts are evaluated on demand</li>
+            <li>You sit back and enjoy</li>
+        </ol>
+
+        <script src='../src/vendor/qwery.js'></script>
+        <script src='../src/vendor/trim.js'></script>
+        <script src='../src/lazy.js'></script>
+        <script src='../src/lazy-loader.js' id='lazyjs' data-jumpstart='js/app.js' data-bundle='js/.bin/all.js'></script>
+    </body>
+</html>

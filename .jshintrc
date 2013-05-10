@@ -1,0 +1,17 @@
+{
+  "curly": true,
+  "eqeqeq": true,
+  "newcap": true,
+  "noarg": true,
+  "sub": true,
+  "undef": true,
+  "boss": true,
+  "eqnull": true,
+  "strict": true,
+  "browser": true,
+  "expr": true,
+  "globals": {
+    "lazyjs": false,
+    "qwery": false
+  }
+}

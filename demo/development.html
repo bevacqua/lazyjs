@@ -1,0 +1,28 @@
+<html>
+    <head>
+        <title>Development Example - LazyJS</title>
+    </head>
+    <body>
+        <h1>Development - Build Process</h1>
+
+        <ol>
+            <li>Nothing</li>
+        </ol>
+
+        <h2>Page Load Flow</h2>
+
+        <ol>
+            <li>You reference LazyJS</li>
+            <li>You don't need to include any other JS files</li>
+            <li>LazyJS evaluates the jumpstart script</li>
+            <li>Scripts get AJAX loaded on demand</li>
+            <li>Scripts are evaluated on demand</li>
+            <li>You sit back and enjoy</li>
+        </ol>
+
+        <script src='../src/vendor/qwery.js'></script>
+        <script src='../src/vendor/trim.js'></script>
+        <script src='../src/lazy.js'></script>
+        <script src='../src/lazy-loader.js' id='lazyjs' data-jumpstart='js/app.js'></script>
+    </body>
+</html>
