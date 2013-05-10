@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <title>LazyJS by bevacqua</title>
+  </head>
+
+  <body>
+    <header>
+      <div class="inner">
+        <h1>LazyJS</h1>
+        <h2>The minimalist JavaScript loader</h2>
+        <a href="https://github.com/bevacqua/lazyjs" class="button"><small>View project on</small>GitHub</a>
+      </div>
+    </header>
+
+    <div id="content-wrapper">
+      <div class="inner clearfix">
+        <section id="main-content">
+          <h1>LazyJS</h1>
+
+<p><strong>LazyJS</strong> is an alternative to CommonJS/Modules and RequireJS with a minimal design that allows you to make your own decisions, rather than trying to force them on you.</p>
+
+<h1>Concept</h1>
+
+<p>The idea with LazyJS is very similar to what RequireJS aims at, which is dependencies that resolve themselves. The difference is LazyJS aims to be less intrusive in how you should style your code, and lets you determine how to handle dependencies beyond the physical modules you use.</p>
+
+<h2>Getting Prepared</h2>
+
+<p>If you care about contributing, you can either download the code using <code>git</code>, or through <code>npm</code>.</p>
+
+<pre><code>git clone https://github.com/bevacqua/lazyjs.git
+
+npm install lazyjs
+</code></pre>
+
+<p>LazyJS has a one-step build process powered by <a href="http://gruntjs.com/">Grunt</a>.</p>
+
+<p>Use <code>grunt demo</code> to see the concept in action, <code>grunt build</code> to build, <code>grunt tests</code> for tests.</p>
+
+<h2>Getting Started with LazyJS</h2>
+
+<p>Using LazyJS, you only need to embed a single <code>&lt;script&gt;</code> tag in your HTML</p>
+
+<pre><code>&lt;script id='lazyjs' src='/js/vendor/lazy.min.js' data-jumpstart='/js/app.js'&gt;&lt;/script&gt;
+</code></pre>
+
+<p>This <code>&lt;script&gt;</code> tag will allow LazyJS to load via AJAX the script you reference in the <code>data-jumpstart</code> attribute. That's familiar enough, RequireJS behaves similarly.</p>
+
+<p>Within scripts, though, there are differences. LazyJS uses what's called <strong>comment directives</strong>. There's two types of these directives.</p>
+
+<ul>
+<li>
+<p><code>define</code> directives, which allow us to define <em>multiple modules in a single file</em>:</p>
+
+<div class="highlight"><pre><span class="cm">/*! lazy define $name */</span>
+</pre></div>
+
+<div class="highlight"><pre><span class="cm">/*! lazy define module-1 */</span>
+<span class="kd">function</span> <span class="nx">sum</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">){</span>
+    <span class="k">return</span> <span class="nx">a</span> <span class="o">+</span> <span class="nx">b</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="cm">/*! lazy define module-2 */</span>
+<span class="kd">function</span> <span class="nx">print</span><span class="p">(</span><span class="nx">text</span><span class="p">){</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">text</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</li>
+</ul><p><strong>Definitions</strong> mean that your modules will now be identified by whatever name <code>$name</code> you pick</p>
+
+<ul>
+<li>
+<p><code>require</code> directives, which make a module <strong>depend on another one</strong>:</p>
+
+<div class="highlight"><pre><span class="cm">/*! lazy require $name */</span>
+</pre></div>
+
+<div class="highlight"><pre><span class="cm">/*! lazy define module-3 */</span>
+<span class="cm">/*! lazy require module-1 */</span>
+<span class="cm">/*! lazy require module-2 */</span>
+<span class="kd">function</span> <span class="nx">funky</span><span class="p">(){</span>
+    <span class="nx">print</span><span class="p">(</span><span class="s1">'the result is '</span> <span class="o">+</span> <span class="nx">sum</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">));</span>
+<span class="p">}</span>
+</pre></div>
+</li>
+</ul><p><strong>Dependency</strong>, as defined by <code>require</code> comment directives, means that the code in a module won't be evaluated <em>at all</em> until every single dependency has been evaluated and resolved.</p>
+
+<h2>Getting Practical</h2>
+
+<p>In a more practical scenario, you would probably want to completely skip module definitions, and stick to the <em>one-module-per-file</em> convention, where if you had a script at <code>/js/foo.js</code>, you could add a <code>require</code> directive like the one below.</p>
+
+<div class="highlight"><pre><span class="cm">/*! lazy require /js/foo.js */</span>
+</pre></div>
+
+<p>If you stick to one module per file, <code>define</code> directives are not necessary (during development). These do become crucial when you are bundling your scripts together, though.</p>
+
+<h2>Getting Real</h2>
+
+<p>In a production scenario you don't want all those AJAX requests flying around. So you change things up very subtly:</p>
+
+<div class="highlight"><pre>    <span class="o">&lt;</span><span class="nx">script</span> <span class="nx">id</span><span class="o">=</span><span class="s1">'lazyjs'</span> <span class="nx">src</span><span class="o">=</span><span class="s1">'/js/vendor/lazy.min.js'</span> <span class="nx">data</span><span class="o">-</span><span class="nx">jumpstart</span><span class="o">=</span><span class="s1">'/js/app.js'</span> <span class="nx">data</span><span class="o">-</span><span class="nx">bundle</span><span class="o">=</span><span class="s1">'js/all.js'</span><span class="o">&gt;&lt;</span><span class="err">/script&gt;</span>
+</pre></div>
+
+<p>This might be kind of deceiving at first glance, but it will just perform two HTTP requests. One for LazyJS, and the other one for everything else. But here's the beauty.</p>
+
+<p>Even though we've now fetched every single line of JavaScript, we are not going to evaluate it yet, we are just storing the strings, after some manipulation to figure out which module is which, and which module needs what. We don't even split the string until we need it.</p>
+
+<p>This approach <strong>drastically increases average load times</strong>, and that's even when the script is cached and gzipped (as they should be). That's because JS parsing can take up a significant time on each page load. Time that might be better spent elsewhere, or <em>better distributed</em>.</p>
+
+<p>Ok, but what happens to the jump-start script now? Well, it's essentially the same scenario as it was before using bundles, except now you have a nice hashtable with a list of modules that are eager to be evaluated. If <code>/js/app.js</code> is among those scripts, it will be parsed and executed immediately, if it's not, then the usual AJAX request would go get it.</p>
+
+<p>If an script has any number of dependencies, then those will be resolved, recursively, until all dependencies are resolved and the script can load. Then, everything gets evaluated.</p>
+
+<p>Note that modules will only be fetched/parsed/evaluated once. Just like when you don't have the aid of a script loader.</p>
+
+<h1>Disclaimer</h1>
+
+<p>This is the early prototype of an idea, an experiment if you will. Hopefully I'll get some input on it's viability, and then decide where the project will go from there.</p>
+
+<p>Suggestions are welcome!</p>
+        </section>
+
+        <aside id="sidebar">
+          <a href="https://github.com/bevacqua/lazyjs/zipball/master" class="button">
+            <small>Download</small>
+            .zip file
+          </a>
+          <a href="https://github.com/bevacqua/lazyjs/tarball/master" class="button">
+            <small>Download</small>
+            .tar.gz file
+          </a>
+
+          <p class="repo-owner"><a href="https://github.com/bevacqua/lazyjs"></a> is maintained by <a href="https://github.com/bevacqua">bevacqua</a>.</p>
+
+          <p>This page was generated by <a href="pages.github.com">GitHub Pages</a> using the Architect theme by <a href="http://twitter.com/jasonlong">Jason Long</a>.</p>
+        </aside>
+      </div>
+    </div>
+
+  
+  </body>
+</html>
