@@ -1,4 +1,4 @@
-# LazyJS #
+# [LazyJS](http://bevacqua.github.io/lazyjs) #
 
 **LazyJS** is an alternative to CommonJS/Modules and RequireJS with a minimal design that allows you to make your own decisions, rather than trying to force them on you.
 
