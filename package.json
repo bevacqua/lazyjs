@@ -1,5 +1,5 @@
 {
-  "name": "LazyJS",
+  "name": "lazyjs",
   "description": "Unopinionated Script Loader alternative to CJS and AMD",
   "homepage": "https://github.com/bevacqua/lazyjs",
   "author": {
