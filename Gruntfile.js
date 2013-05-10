@@ -48,7 +48,7 @@ module.exports = function(grunt) {
 
     grunt.registerTask('test', ['clean', 'jshint', 'jasmine_node']); // cleanup and run tests
 
-    grunt.registerTask('build', ['assetify:bla']); // compile assets
+    grunt.registerTask('build', ['assetify']); // compile assets
 
     grunt.registerTask('default', ['test', 'build']); // by default, run the tests and build
 
