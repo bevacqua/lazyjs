@@ -5,7 +5,7 @@
             separator: ';'
         },
         cache = {},
-        q = window.qwery,
+        q = document.getElementById,
         lazyjs = window.lazyjs,
         ajax = lazyjs.ajaxGet,
         rdirective = /^\/\*! *lazy *([a-z]*) *([^ ]*) *\*\/$/img,
@@ -149,7 +149,7 @@
     }
 
     function init(){
-        var lazyjs = q('#lazyjs');
+        var lazyjs = q('lazyjs');
         if(!lazyjs.length){
             throw new Error('#lazyjs identifier missing');
         }
