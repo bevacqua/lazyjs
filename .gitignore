@@ -1,6 +1,4 @@
 .DS_Store
-.env
-.bin
-Thumbs.db
 *.sublime-*
 node_modules
+build

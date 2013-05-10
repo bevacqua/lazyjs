@@ -10,9 +10,9 @@
 
     var lazyjs = {
         ajaxGet: function(url, done){
-            var xhr = null;
+            var xhr;
 
-            if (window.XMLHttpRequest) {
+            if(window.XMLHttpRequest){
                 xhr = new XMLHttpRequest();
             }else{
                 xhr = new ActiveXObject("Microsoft.XMLHTTP");
@@ -21,8 +21,8 @@
             xhr.open('GET', url, true);
             xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
             xhr.send(null);
-            xhr.onreadystatechange = function() {
-                if (xhr.readyState == 4) {
+            xhr.onreadystatechange = function(){
+                if (xhr.readyState === 4) {
                     done(xhr, xhr.responseText);
                 }
             };

@@ -11,6 +11,9 @@
   "browser": true,
   "expr": true,
   "globals": {
+    "console": false,
+    "XMLHttpRequest": false,
+    "ActiveXObject": false,
     "lazyjs": false,
     "qwery": false
   }

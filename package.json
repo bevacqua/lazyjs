@@ -1,0 +1,25 @@
+{
+  "name": "LazyJS",
+  "description": "Unopinionated Script Loader alternative to CJS and AMD",
+  "homepage": "https://github.com/bevacqua/lazyjs",
+  "author": {
+    "name": "Nicolas Bevacqua",
+    "email": "nicolasbevacqua@gmail.com",
+    "url": "http://www.ponyfoo.com"
+  },
+  "version": "0.0.1",
+  "dependencies": {},
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-assetify": "~0.1.1",
+    "grunt-cli": "~0.1.6",
+    "grunt-contrib-clean": "~0.4.0",
+    "grunt-contrib-jshint": "~0.1.1",
+    "grunt-jasmine-node": "0.1.0",
+    "node-static": "~0.6.9"
+  },
+  "engines": {
+    "node": "0.8.x",
+    "npm": "1.2.x"
+  }
+}

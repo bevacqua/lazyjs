@@ -8,7 +8,7 @@ The idea with LazyJS is very similar to what RequireJS aims at, which is depende
 
 ## Getting Started with LazyJS ##
 
-Using LazyJS, you only need to embed a single script tag in your HTML.
+Using LazyJS, you only need to embed a single <script> tag in your HTML.
 
     <script id='lazyjs' src='/js/vendor/lazy.min.js' data-jumpstart='/js/app.js'></script>
 
