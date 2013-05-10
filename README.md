@@ -10,9 +10,9 @@ The idea with LazyJS is very similar to what RequireJS aims at, which is depende
 
 Using LazyJS, you only need to embed a single <script> tag in your HTML.
 
-    <script id='lazyjs' src='/js/vendor/lazy.min.js' data-jumpstart='/js/app.js'></script>
+    script id='lazyjs' src='/js/vendor/lazy.min.js' data-jumpstart='/js/app.js'
 
-This `<script>` tag will allow LazyJS to load via AJAX the script you reference in the `data-jumpstart` attribute. That's familiar enough, RequireJS behaves similarly.
+This `script` tag will allow LazyJS to load via AJAX the script you reference in the `data-jumpstart` attribute. That's familiar enough, RequireJS behaves similarly.
 
 Within scripts, though, there are differences. LazyJS uses what's called **comment directives**. So far there are two types of these directives.
 
@@ -55,7 +55,7 @@ If you stick to one module per file, `define` directives are not necessary. Thes
 
 In a production scenario you don't want all those AJAX requests flying around. So you change things up very subtly:
 
-    <script id='lazyjs' src='/js/vendor/lazy.min.js' data-jumpstart='/js/app.js' data-bundle='js/all.js'></script>
+    script id='lazyjs' src='/js/vendor/lazy.min.js' data-jumpstart='/js/app.js' data-bundle='js/all.js'
 
 This might be kind of deceiving at first glance, but it will just perform two HTTP requests. One for LazyJS, and the other one for everything else. But here's the beauty.
 
