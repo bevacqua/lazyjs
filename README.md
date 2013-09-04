@@ -105,3 +105,7 @@ Note that modules will only be fetched/parsed/evaluated once. Just like when you
 This is the early prototype of an idea, an experiment if you will. Hopefully I'll get some input on it's viability, and then decide where the project will go from there.
 
 Suggestions are welcome!
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/bevacqua/lazyjs/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
