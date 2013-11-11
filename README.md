@@ -10,10 +10,9 @@ The idea with LazyJS is very similar to what RequireJS aims at, which is depende
 
 If you care about contributing, you can either download the code using `git`, or through `npm`.
 
-```posh
-    git clone https://github.com/bevacqua/lazyjs.git
-    
-    npm install lazyjs
+```shell
+git clone https://github.com/bevacqua/lazyjs.git
+npm install lazyjs --save
 ```
 
 LazyJS has a one-step build process powered by [Grunt](http://gruntjs.com/).
@@ -24,8 +23,8 @@ Use `grunt demo` to see the concept in action, `grunt build` to build, `grunt te
 
 Using LazyJS, you only need to embed a single `<script>` tag in your HTML
 
-```html
-    <script id='lazyjs' src='/js/vendor/lazy.min.js' data-jumpstart='/js/app.js'></script>
+```xml
+<script id='lazyjs' src='/js/vendor/lazy.min.js' data-jumpstart='/js/app.js'></script>
 ```
 
 This `<script>` tag will allow LazyJS to load via AJAX the script you reference in the `data-jumpstart` attribute. That's familiar enough, RequireJS behaves similarly.
@@ -35,38 +34,38 @@ Within scripts, though, there are differences. LazyJS uses what's called **comme
     
 - `define` directives, which allow us to define _multiple modules in a single file_:
 
-    ```js
-    /*! lazy define $name */
-    ```
+```js
+/*! lazy define $name */
+```
 
-    ```js
-    /*! lazy define module-1 */
-    function sum(a, b){
-        return a + b;
-    }
+```js
+/*! lazy define module-1 */
+function sum(a, b){
+    return a + b;
+}
 
-    /*! lazy define module-2 */
-    function print(text){
-        console.log(text);
-    }
-    ```
+/*! lazy define module-2 */
+function print(text){
+    console.log(text);
+}
+```
 
 **Definitions** mean that your modules will now be identified by whatever name `$name` you pick
     
 - `require` directives, which make a module **depend on another one**:
 
-    ```js
-    /*! lazy require $name */
-    ```
+```js
+/*! lazy require $name */
+```
 
-    ```js
-    /*! lazy define module-3 */
-    /*! lazy require module-1 */
-    /*! lazy require module-2 */
-    function funky(){
-        print('the result is ' + sum(5, -2));
-    }
-    ```
+```js
+/*! lazy define module-3 */
+/*! lazy require module-1 */
+/*! lazy require module-2 */
+function funky(){
+    print('the result is ' + sum(5, -2));
+}
+```
 
 **Dependency**, as defined by `require` comment directives, means that the code in a module won't be evaluated _at all_ until every single dependency has been evaluated and resolved.
 
@@ -84,8 +83,8 @@ If you stick to one module per file, `define` directives are not necessary (duri
 
 In a production scenario you don't want all those AJAX requests flying around. So you change things up very subtly:
 
-```html
-    <script id='lazyjs' src='/js/vendor/lazy.min.js' data-jumpstart='/js/app.js' data-bundle='js/all.js'></script>
+```xml
+<script id='lazyjs' src='/js/vendor/lazy.min.js' data-jumpstart='/js/app.js' data-bundle='js/all.js'></script>
 ```
 
 This might be kind of deceiving at first glance, but it will just perform two HTTP requests. One for LazyJS, and the other one for everything else. But here's the beauty.
